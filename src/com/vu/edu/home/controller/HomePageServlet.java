@@ -35,7 +35,7 @@ public class HomePageServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		//RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/homePage.jsp");
 		//dispatcher.forward(request, response);
-		System.out.println("HomePageServlet-do-Get");
+		System.out.println("HomePageServlet-doGet");
 		String pathInfo = request.getRequestURI();
 		System.out.println("HomePageServlet-doGet:"+ pathInfo);
 		if(pathInfo.contains("UserServlet")) {
