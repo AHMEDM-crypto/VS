@@ -66,7 +66,7 @@ public class UserServlet extends HttpServlet {
 		aUser.setDob(request.getParameter("dob"));
 		aUser.setRole(role);
 		aUser.setVersion(0);
-		aUser.setStatus(0);
+		
 	
 		try {
 			validUser = isValidUser(aUser);

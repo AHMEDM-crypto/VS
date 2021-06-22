@@ -4,7 +4,7 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String id;
-    private int status;
+    private String status;
     private String userName;
     private String password;
     private String dob; 
@@ -45,10 +45,10 @@ public class User {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public String getUserName() {
