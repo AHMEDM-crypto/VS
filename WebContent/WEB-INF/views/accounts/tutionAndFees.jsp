@@ -136,7 +136,7 @@
         #image-text{
             position: absolute;
             top: 20%;
-            left: 50%;
+            left: 55%;
             font-family: 'Roboto';
             color: #000;
             transform: translate(-30%, -30%);
@@ -158,49 +158,26 @@
 	</div>
 </header>
 
+<div align="center">
+<h1>Tuition & Fees</h1>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-	<div id="container">
+<table border="1" style="width: 80%">
+   <tr>
+   		<th>GRADE</th>
+   		<th>TUITION</th>
+   		<th>DUE DATE</th>
+   	</tr>
+   <c:forEach items="${requestScope.tuitions}" var="tuition">
+    <tr>
+    <td><c:out value="${tuition.grade}"></c:out></td>
+    <td><c:out value="${tuition.tuition}"></c:out></td>
+    <td><c:out value="${tuition.dueDate}"></c:out></td>
+    </tr>
+   
+   </c:forEach>
+</table>
 
-		<main id="center" class="column">
-			<article>
-			
-				<h1>Welcome to eSchool Home</h1>
-				<p>In one learning platform, watch your math or chemistry lectures. eSchool is a digital platform offering students, parents and educators a virtual approach of learning </p><p>Perhaps most importantly, eSchool makes distance learning relevant to everyday life<p>Welcome and Enjoy Learning.</p><h3>Our Guiding Principles</h3><p>The most important moment of your life is now. The most important person in your life is the one you are with now, and the most important activity in your life is the one you are involved with right now."</p>
-			
-			</article>								
-		</main>
-
-		<nav id="left" class="column">
-			<h3>Academics</h3>
-			<ul>
-				<li><a href="EnrhServlet">Register for Enrichment Classes</a></li>
-				<li><a href="FeeServlet">Tuition and Fee</a></li>
-				<li><a href="FacultyServlet">Faculty & Staff Directory</a></li>
-				<li><a href="AboutServlet">About eSchool</a></li>
-			</ul>
-			<h3>Resources</h3>
-			<ul>
-				<li><a href="#">Academic Calendar</a></li>
-				<li><a href="SHBookServlet">Student Handbook</a></li>
-				<li><a href="#">Catalog</a></li>
-			</ul>
-
-		</nav>
-
-		<div id="right" class="column">
-		    <h3>Login</h3>
-			<ul>
-				<li><a href="LoginServlet">Login</a></li>
-				<li><a href="UserServlet">Register</a></li>
-			</ul>
-		</div>
-
-	</div>
-
-	<div id="footer-wrapper">
-		<footer id="footer"><p style="font-style: italic;font-size:11px;">Equal Opportunity Institution:eSchool is an affirmative action/equal opportunity employer.</p></footer>
-	</div>
-
+</div>
 </body>
-
 </html>

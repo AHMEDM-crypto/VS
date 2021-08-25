@@ -5,8 +5,18 @@ public class Faculty {
 	private String firstName;
 	private String lastName;
 	private String dob; 
+	private String email;
     private String status;
     private int version;
+    
+    
+    
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getEmployeeId() {
 		return employeeId;
 	}

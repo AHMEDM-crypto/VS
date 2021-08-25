@@ -160,15 +160,18 @@
 		</h2>
 	</div>
 </header>
-
+    <spacer type="horizontal" width="100" height="100">.</spacer>
 
 	<div id="container">
 		<h1>eSchool Login</h1>
+		<spacer type="horizontal" width="100" height="100"></spacer>
 		<form action="<%= request.getContextPath()%>/LoginServlet" method="post">
+		    <spacer type="horizontal" width="100" height="200">.</spacer>
+		    
 			<table style="width: 80%">
 				<tr>
-    				<td>User Id</td>
-    				<td><input type="text" name="id"/></td>
+    				<td>User Name</td>
+    				<td><input type="text" name="userName"/></td>
 				</tr>
 				<tr>
     				<td>Password</td>
@@ -176,11 +179,12 @@
 				</tr>
 		
 	   		</table>
+	   		
 			<input type="submit" value="Submit">
        </form>
 
 	</div>
-
+    
 	<div id="footer-wrapper">
 		<footer id="footer"><p style="font-style: italic;font-size:11px;">Equal Opportunity Institution:eSchool is an affirmative action/equal opportunity employer.</p></footer>
 	</div>

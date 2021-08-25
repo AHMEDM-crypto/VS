@@ -12,10 +12,44 @@ import java.sql.Statement;
 import com.vu.edu.registration.model.Faculty;
 import com.vu.edu.registration.model.Parent;
 import com.vu.edu.registration.model.RegisteredStudent;
+import com.vu.edu.registration.model.Tuition;
 import com.vu.edu.registration.model.User;
 
 public class UserDao {
 	
+	public ArrayList <Faculty> getAllFaculty()throws ClassNotFoundException{
+		ArrayList<Faculty> users = new ArrayList<Faculty>();
+		String GET_USERS_SQL = "Select * from faculty";
+		Connection connection = null;
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		
+			connection = 
+					DriverManager.getConnection("jdbc:mysql://localhost:3306/virtualschool?useSSL=false", "AHMEDM", "Initial1");
+		
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(GET_USERS_SQL);
+			while(rs.next()) {
+				Faculty currentUser = new Faculty();
+				currentUser.setStatus(rs.getString("STATUS"));
+				currentUser.setFirstName(rs.getString("FIRST_NAME"));
+				currentUser.setLastName(rs.getString("LAST_NAME"));
+				currentUser.setDob(rs.getString("DOB"));
+				currentUser.setEmail(rs.getString("EMAIL"));
+				
+				users.add(currentUser);
+			}
+			rs.close();
+		}catch(Exception moae) {
+			System.out.println("Encountered Exception:" + moae.getClass().getName()+ " With message:"+ moae.getMessage());
+		}finally {
+			try {
+				connection.close();
+			}catch(Exception ignore) {}
+		}
+		return users;
+	}
 	public int registerUser(User user)throws ClassNotFoundException{
 		int result =0;
 		String INSERT_USERS_SQL = "INSERT INTO USER " + 
@@ -86,6 +120,115 @@ public class UserDao {
 			}catch(Exception ignore) {}
 		}
 		return users;
+	}
+	
+	
+	public ArrayList <Tuition> getAllGradeTuition()throws ClassNotFoundException{
+		ArrayList<Tuition> fees = new ArrayList<Tuition>();
+		String GET_FEE_SQL = "Select * from tuition ";
+		Connection connection = null;
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		
+			connection = 
+					DriverManager.getConnection("jdbc:mysql://localhost:3306/virtualschool?useSSL=false", "AHMEDM", "Initial1");
+		
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(GET_FEE_SQL);
+			while(rs.next()) {
+				Tuition currentTuition = new Tuition();
+				currentTuition.setGrade(rs.getInt("GRADE"));
+				currentTuition.setTuition(rs.getString("TUITION"));
+				currentTuition.setDueDate(rs.getString("DUEDATE"));
+				
+				
+				fees.add(currentTuition);
+			}
+			rs.close();
+		}catch(Exception moae) {
+			System.out.println("Encountered Exception:" + moae.getClass().getName()+ " With message:"+ moae.getMessage());
+		}finally {
+			try {
+				connection.close();
+			}catch(Exception ignore) {}
+		}
+		return fees;
+	}
+	/**
+	 * getUserByNameNPassword
+	 * @param userid
+	 * @param password
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
+	public User getUserByNameNPassword(String userid, String password)throws ClassNotFoundException{
+		User currentUser = null;
+		Connection connection = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connection = 
+					DriverManager.getConnection("jdbc:mysql://localhost:3306/virtualschool?useSSL=false", "AHMEDM", "Initial1");
+		
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM user WHERE username=? AND password=?");
+			stmt.setString(1, userid);
+			stmt.setString(2, password);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				currentUser = new User();
+				currentUser.setId(rs.getString("ID"));
+				currentUser.setStatus(rs.getString("STATUS"));
+				currentUser.setUserName(rs.getString("USERNAME"));
+				currentUser.setPassword(rs.getString("PASSWORD"));
+				currentUser.setFirstName(rs.getString("FIRST_NAME"));
+				currentUser.setLastName(rs.getString("LAST_NAME"));
+				currentUser.setDob(rs.getString("DOB"));
+				currentUser.setRole(rs.getString("ROLE"));
+				break;
+			}
+		}catch(Exception moae) {
+			System.out.println("Encountered Exception:" + moae.getClass().getName()+ " With message:"+ moae.getMessage());
+		}finally {
+			try {
+				connection.close();
+			}catch(Exception ignore) {}
+		}
+		return currentUser;
+	}
+	//getUserByUserName
+	public User getUserByUserName(String userName)throws ClassNotFoundException{
+		User currentUser = null;
+		String GET_USERS_SQL = "Select * from user where USERNAME = '"+ userName + "'";	
+		Connection connection = null;
+		try {
+		
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		
+			connection = 
+					DriverManager.getConnection("jdbc:mysql://localhost:3306/virtualschool?useSSL=false", "AHMEDM", "Initial1");
+		
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(GET_USERS_SQL);
+			while(rs.next()) {
+				currentUser = new User();
+				currentUser.setId(rs.getString("ID"));
+				currentUser.setStatus(rs.getString("STATUS"));
+				currentUser.setUserName(rs.getString("USERNAME"));
+				currentUser.setPassword(rs.getString("PASSWORD"));
+				currentUser.setFirstName(rs.getString("FIRST_NAME"));
+				currentUser.setLastName(rs.getString("LAST_NAME"));
+				currentUser.setDob(rs.getString("DOB"));
+				currentUser.setRole(rs.getString("ROLE"));
+			}
+			rs.close();
+		}catch(Exception moae) {
+			System.out.println("Encountered Exception:" + moae.getClass().getName()+ " With message:"+ moae.getMessage());
+		}finally {
+			try {
+				connection.close();
+			}catch(Exception ignore) {}
+		}
+		return currentUser;
 	}
 	
 	public User getUser(String userId)throws ClassNotFoundException{

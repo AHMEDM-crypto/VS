@@ -3,9 +3,7 @@ package com.vu.edu.registration.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,18 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.vu.edu.registration.dao.UserDao;
-import com.vu.edu.registration.model.Faculty;
+import com.vu.edu.registration.model.Tuition;
 import com.vu.edu.registration.model.User;
 
-@WebServlet("/FacultyServlet")
-public class FacultyServlet extends HttpServlet {
+@WebServlet("/FeeServlet")
+public class FeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserDao userDao = new UserDao();
 	
 	 /**
      * @see HttpServlet#HttpServlet()
      */
-    public FacultyServlet() {
+    public FeeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,12 +33,12 @@ public class FacultyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			List<Faculty> list = new ArrayList<Faculty>();
-			list = userDao.getAllFaculty();
-			request.setAttribute("users", list);
-			System.out.println("FacultyServlet-doGet we r here!!");
+			List<Tuition> list = new ArrayList<Tuition>();
+			list = userDao.getAllGradeTuition();
+			request.setAttribute("tuitions", list);
+			System.out.println("FeeServlet-doGet we r here!!");
 			String pathInfo = request.getPathInfo();
-			request.getRequestDispatcher("/WEB-INF/views/UserFaculty.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/accounts/tutionAndFees.jsp").forward(request, response);
 		}catch(ClassNotFoundException cnfe) {}
 	}
 	/**

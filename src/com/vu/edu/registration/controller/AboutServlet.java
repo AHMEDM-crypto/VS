@@ -1,30 +1,21 @@
 package com.vu.edu.registration.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.vu.edu.registration.dao.UserDao;
-import com.vu.edu.registration.model.Faculty;
-import com.vu.edu.registration.model.User;
 
-@WebServlet("/FacultyServlet")
-public class FacultyServlet extends HttpServlet {
+@WebServlet("/AboutServlet")
+public class AboutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserDao userDao = new UserDao();
-	
 	 /**
      * @see HttpServlet#HttpServlet()
      */
-    public FacultyServlet() {
+    public AboutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,19 +26,18 @@ public class FacultyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			List<Faculty> list = new ArrayList<Faculty>();
-			list = userDao.getAllFaculty();
-			request.setAttribute("users", list);
-			System.out.println("FacultyServlet-doGet we r here!!");
-			String pathInfo = request.getPathInfo();
-			request.getRequestDispatcher("/WEB-INF/views/UserFaculty.jsp").forward(request, response);
-		}catch(ClassNotFoundException cnfe) {}
+			
+			System.out.println("AboutServlet-doGet !!");
+			request.getRequestDispatcher("/WEB-INF/views/AboutESchool.jsp").forward(request, response);
+		}catch(Exception cnfe) {}
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("FacultyServlet-doPost we r here!!");
+		
+			
+	
 	}
 
 }

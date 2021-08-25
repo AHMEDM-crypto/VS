@@ -159,15 +159,20 @@
 </header>
 
 <div align="center">
-<h1>Registered Users</h1>
+<h1>Faculty & Staff</h1>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <table border="1" style="width: 80%">
+    <tr>
+   		<th>Last Name</th>
+   		<th>First Name</th>
+   		<th>Email</th>
+   	</tr>
    <c:forEach items="${requestScope.users}" var="user">
     <tr>
-    <td><c:out value="${user.id}"></c:out></td>
     <td><c:out value="${user.lastName}"></c:out></td>
     <td><c:out value="${user.firstName}"></c:out></td>
+    <td><c:out value="${user.email}"></c:out></td>
     </tr>
    
    </c:forEach>

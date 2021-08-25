@@ -1,8 +1,7 @@
 package com.vu.edu.login.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,34 +44,32 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("LoginServlet-doPost we r here!!");
 		User user = null;
-		String userId = request.getParameter("id");
+		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
+		RequestDispatcher dispatcher = null;
 		try {
-			user = userDao.getUser(userId);
+			user = userDao.getUserByNameNPassword(userName, password);
+			//user = userDao.getUserByUserName(userName);
 			if(user != null && user.getPassword().equals(password)) {
 				String userRole = user.getRole();
+				
 				if(userRole.equalsIgnoreCase("Student")) {
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/login/studentPage.jsp");
-					dispatcher.forward(request, response);
+					dispatcher = request.getRequestDispatcher("/WEB-INF/views/login/studentPage.jsp");					
 				}else if(userRole.equalsIgnoreCase("Parent")) {
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/login/parentPage.jsp");
-					dispatcher.forward(request, response);
+				    dispatcher = request.getRequestDispatcher("/WEB-INF/views/login/parentPage.jsp");					
 				}else if(userRole.equalsIgnoreCase("Faculty")) {
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/login/facultyPage.jsp");
-					dispatcher.forward(request, response);
+					dispatcher = request.getRequestDispatcher("/WEB-INF/views/login/facultyPage.jsp");					
 				}else if(userRole.equalsIgnoreCase("Employee")) {
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/login/adminPage.jsp");
-					dispatcher.forward(request, response);
+					dispatcher = request.getRequestDispatcher("/WEB-INF/views/login/adminPage.jsp");					
 				}else {
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/errorPage.jsp");
-					dispatcher.forward(request, response);
+					dispatcher = request.getRequestDispatcher("/WEB-INF/views/errorPage.jsp");					
 				}
 			}else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/errorPage.jsp");
-				dispatcher.forward(request, response);
+				dispatcher = request.getRequestDispatcher("/WEB-INF/views/errorPage.jsp");				
 			}
+			dispatcher.forward(request, response);
 			
-		}catch(Exception ignore) {}
+		}catch(Exception ignore4now) {}
 	}
 
 }
